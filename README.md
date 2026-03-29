@@ -4,15 +4,10 @@ A bash script for determining your IP geolocation using various GeoIP services a
 This is a **fork** of the [original script](https://github.com/vernette/ipregion/), with a number of improvements and fixes.
 
 ## Usage
-Run script:
-```bash
-bash <(wget -qO- https://ipregion.xyz)
-```
-Or run **directly** from GitHub:
+Run script **directly** from GitHub:
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/MacTepYoba/ipregion/main/ipregion.sh)
 ```
-
 
 Output example:
 
