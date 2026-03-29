@@ -1,98 +1,98 @@
 # ipregion
 
-A bash script for determining your IP geolocation using various GeoIP services and popular websites.  
-This is a **fork** of the [original script](https://github.com/vernette/ipregion/), with a number of improvements and fixes.
+Bash-скрипт для определения геолокации вашего IP-адреса с помощью различных сервисов GeoIP и популярных веб-сайтов.  
+Это **форк** [оригинального скрипта](https://github.com/vernette/ipregion/), с рядом улучшений и исправлений.
 
-## Usage
-Run script **directly** from GitHub:
+## Использование:
+Запуск скрипта **напрямую** с GitHub:
 ```bash
 bash <(wget -qO- https://raw.githubusercontent.com/MacTepYoba/ipregion/main/ipregion.sh)
 ```
 
-Output example:
+Пример вывода:
 
 ![image](https://i.imgur.com/Bn1o644.png)
 
-## What's New in This Fork
+## Что нового:
 
-Compared to the original script, this fork includes several improvements and fixes:
+По сравнению с оригинальным скриптом, эта версия включает в себя несколько улучшений и исправлений:
 
-- **Improved IPv6 detection** — previously unreliable in some cases.  
-- **Fixed freezes** on certain services.  
-- **Adjusted output table alignment** for better readability.  
-- **Separated YouTube and Google checks** — sometimes show different regions.  
-- **Correct detection of Google China (CN) region**.  
-- **Added support for additional services**: 2ip.io, Youtube Music, Bing, and Amazon Prime.  
-- **ASN detection using MaxMind database** — same as [IPQuality](https://github.com/xykt/IPQuality/).  
-- **CDN services removed from the default group** — can be checked separately if needed.  
-- **Enhanced human-readable output** with country name decoding and percentage calculations.  
-- **Country names + percentage stats**: alongside ISO codes, shows country names and percentage distribution across services
-- **Fixed minor bugs**, e.g., inability to interrupt the script during execution.
+- **Улучшено обнаружение IPv6** — ранее в некоторых случаях оно работало ненадежно.   
+- **Исправлены зависания** некоторых сервисов.   
+- **Скорректировано выравнивание таблицы результатов** для лучшей читаемости.   
+- **Разделены проверки YouTube и Google** — иногда они показывают разные регионы.   
+- **Правильно определяется регион Google в Китае (CN)**.   
+- **Добавлена поддержка дополнительных сервисов**: 2ip.io, Youtube Music, Bing и Amazon Prime.   
+- **Обнаружение ASN с помощью базы данных MaxMind** — аналогично [IPQuality](https://github.com/xykt/IPQuality/).  
+- **Сервисы CDN удалены из группы по умолчанию** — при необходимости их можно проверить отдельно.  
+- **Улучшенный, удобный для восприятия вывод** с расшифровкой названий стран и процентными расчетами.  
+- **Названия стран + процентная статистика**: наряду с кодами ISO отображаются названия стран и процентное распределение по сервисам. 
+- **Исправлены мелкие ошибки**, например невозможность прервать выполнение скрипта.
 
-## Main features
+## Основные функции
 
-- Checks your IP geolocation using multiple public GeoIP APIs
-- Results from both "primary" GeoIP services and popular web services (YouTube, Netflix, Twitch, etc.)
-- Supports both IPv4 and IPv6 (can test separately)
-- SOCKS5 proxy and custom network interface support
-- JSON output for automation and integration
-- Color-coded, easy-to-read table output
+- Проверяет геолокацию вашего IP-адреса с помощью нескольких общедоступных API GeoIP
+- Результаты как от «основных» сервисов GeoIP, так и от популярных веб-сервисов (YouTube, Netflix, Twitch и т.д.)
+- Поддерживает как IPv4, так и IPv6 (можно тестировать по отдельности)
+- Поддержка прокси-сервера SOCKS5 и пользовательского сетевого интерфейса
+- Вывод в формате JSON для автоматизации и интеграции
+- Легко читаемая таблица с цветовой кодировкой
 
-## Dependencies
+## Зависимости
 
 - bash
 - curl
 - jq
 - util-linux or bsdmainutils (for `column`)
 
-## Country codes
+## Коды стран
 
-The script outputs country codes in ISO 3166-1 alpha-2 format (e.g., RU, US, DE).  
-In the **human-readable output**, the script also shows the **full country name** and **percentage distribution**.  
+Скрипт выводит коды стран в формате ISO 3166-1 альфа-2 (например, RU, US, DE).  
+В **человекочитаемом выводе** скрипт также показывает **полное название страны** и **процентное распределение**.
 
-For manual lookup of codes, you can use the official ISO website: [https://www.iso.org/obp/ui/#search/code/](https://www.iso.org/obp/ui/#search/code/)
+Для ручного поиска кодов можно воспользоваться официальным сайтом ISO: [https://www.iso.org/obp/ui/#search/code/](https://www.iso.org/obp/ui/#search/code/)
 
-### Common use cases
+### Варианты использования:
 
 ```bash
-# Show help message
+# Показать справочное сообщение
 ./ipregion.sh --help
 
-# Check all services with default settings
+# Проверка всех сервисов с настройками по умолчанию
 ./ipregion.sh
 
-# Check only GeoIP services
+# Проверка только сервисов GeoIP
 ./ipregion.sh --group primary
 
-# Check only CDN services
+# Проверка только сервисов CDN
 ./ipregion.sh --group cdn
 
-# Check only popular web services
+# Проверка только популярных web сервисов
 ./ipregion.sh --group custom
 
-# Test only IPv4
+# Проверка только IPv4
 ./ipregion.sh --ipv4
 
-# Test only IPv6
+# Проверка только IPv6
 ./ipregion.sh --ipv6
 
-# Use SOCKS5 proxy
+# Использовать SOCKS5 прокси
 ./ipregion.sh --proxy 127.0.0.1:1080
 
-# Use a specific network interface
+# Использовать определенный сетевой интерфейс
 ./ipregion.sh --interface eth1
 
-# Set custom curl request timeout in seconds
+# Установить пользовательское время ожидания запроса curl в секундах
 ./ipregion.sh --timeout 20
 
-# Output result as JSON
+# Вывести результат в формате JSON
 ./ipregion.sh --json
 
-# Enable verbose logging
+# Включить подробное ведение журнала
 ./ipregion.sh --verbose
 ```
 
-All options available in the help message (`-h, --help`) can be used and combined.
+Можно использовать и комбинировать все параметры, доступные в справочном сообщении (`-h, --help`).
 
 ## Options
 
