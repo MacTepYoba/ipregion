@@ -10,7 +10,7 @@ bash <(wget -qO- https://ipregion.xyz)
 ```
 Or run **directly** from GitHub:
 ```bash
-bash <(wget -qO- https://raw.githubusercontent.com/Davoyan/ipregion/main/ipregion.sh)
+bash <(wget -qO- https://raw.githubusercontent.com/MacTepYoba/ipregion/main/ipregion.sh)
 ```
 
 
